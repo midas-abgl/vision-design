@@ -1,0 +1,18 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Shirt {
+    id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    model     String    @db.Text
+    prices    Decimal[] @db.Decimal(4, 2)
+    photos    String[]  @db.Text
+    colors    String[]  @db.Text
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @default(now()) @updatedAt
+}
