@@ -8,7 +8,7 @@ export interface PhotoSlideshowProps {
 	photos: string[];
 }
 
-export default function PhotoSlideshow({ photos }: PhotoSlideshowProps) {
+export function PhotoSlideshow({ photos }: PhotoSlideshowProps) {
 	const [currentPhoto, setCurrentPhoto] = useState(0);
 
 	photos = photos.slice(0, 4);

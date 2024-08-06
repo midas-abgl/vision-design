@@ -2,7 +2,8 @@
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	justify-content: center;
-	align-items: center;
+	gap: 2rem;
+
 	padding: 0 15vw;
 }
 
@@ -43,5 +44,52 @@
 
 			border-radius: 1rem;
 		}
+	}
+}
+
+.shirtInfo {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+
+	margin-top: 1rem;
+
+	h4 {
+		color: #555;
+	}
+}
+
+.purchaseOptions {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.sizesAvailable {
+	display: flex;
+	gap: 1rem;
+}
+
+.colorsAvailable {
+	display: flex;
+	gap: 0.5rem;
+
+	button {
+		padding: 0.25rem 0.5rem;
+
+		border: 1px solid #000;
+		border-radius: 0.5rem;
+	}
+}
+
+.pricing {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+
+	span {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
 	}
 }
