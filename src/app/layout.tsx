@@ -41,8 +41,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head>
-				<link rel="icon" type="image/svg+xml" href="favicon.svg" />
-				<link rel="icon" type="image/png" href="favicon.png" />
+				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+				<link rel="icon" type="image/png" href="/favicon.png" />
 				<link rel="manifest" href="/site.webmanifest" />
 				<meta name="theme-color" content={viewport.themeColor} />
 			</head>
