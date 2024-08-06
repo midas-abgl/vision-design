@@ -13,8 +13,6 @@ export default function PhotoSlideshow({ photos }: PhotoSlideshowProps) {
 
 	photos = photos.slice(0, 4);
 
-	photos = [photos[0], photos[0], photos[0], photos[0]];
-
 	return (
 		<div className={styles.photoSlideshow}>
 			<div>
