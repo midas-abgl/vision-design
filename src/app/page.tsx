@@ -1,6 +1,7 @@
+import ColorCircle from "@components/ColorCircle";
 import prisma from "@database";
-import { sanitizeJson } from "@hyoretsu/utils";
-import ShirtTile from "./components/ShirtTile";
+import { Link } from "@hyoretsu/react-components";
+import Image from "next/image";
 import styles from "./styles.module.scss";
 
 export default async function Home() {
@@ -8,8 +9,29 @@ export default async function Home() {
 
 	return (
 		<div className={styles.container}>
-			{shirtModels.map(model => (
-				<ShirtTile key={model.id} shirt={sanitizeJson(model)} />
+			{shirtModels.map(({ colors, id, model, photos, prices }) => (
+				<div key={id} className={styles.shirtTile}>
+					<Image alt={`Camiseta ${model}`} src={photos[0]} width={230} height={344} />
+
+					<h4>{model}</h4>
+
+					<p>
+						A partir de:
+						<br />
+						<b>R${prices[0].toLocaleString()}</b>
+					</p>
+
+					<span>Cores:</span>
+					<div className={styles.shirtColors}>
+						{colors.map(color => (
+							<ColorCircle key={color} color={color} />
+						))}
+					</div>
+
+					<Link href={`/shirts/${id}`}>
+						<button type="button">Comprar</button>
+					</Link>
+				</div>
 			))}
 		</div>
 	);
