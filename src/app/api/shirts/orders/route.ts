@@ -1,7 +1,22 @@
 import prisma from "@database";
+import { type NextRequest, NextResponse } from "next/server";
+
+export async function GET(req: NextRequest) {
+	const { searchParams } = req.nextUrl;
+	const id = searchParams.get("id")!;
+
+	const order = await prisma.shirtOrder.findUnique({
+		where: { id },
+		include: {
+			shirt: true,
+		},
+	});
+
+	return NextResponse.json(order);
+}
 
 export async function POST(req: Request) {
-	const { client: clientData, color, modelId, size } = await req.json();
+	const { client: clientData, color, modelId: shirtId, size } = await req.json();
 
 	let client = await prisma.client.findUnique({ where: { email: clientData.email } });
 	if (!client) {
@@ -19,7 +34,7 @@ export async function POST(req: Request) {
 			color,
 			downPayment: 20,
 			clientId: client.id,
-			modelId,
+			shirtId,
 			size,
 		},
 	});

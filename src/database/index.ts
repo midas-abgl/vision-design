@@ -1,17 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 const prismaClientSingleton = () => {
-	return new PrismaClient().$extends({
-		result: {
-			shirt: {
-				prices: {
-					compute({ prices }) {
-						return prices.map(price => price.toNumber());
-					},
-				},
-			},
-		},
-	});
+	return new PrismaClient();
 };
 
 // biome-ignore lint/suspicious/noShadowRestrictedNames: Recommended Prisma way
