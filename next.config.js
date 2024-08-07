@@ -19,12 +19,13 @@ module.exports = async (phase, { defaultConfig }) => {
 		images: {
 			remotePatterns: [{ hostname: "*" }],
 		},
+		output: "standalone",
 		productionBrowserSourceMaps: true,
 		reactStrictMode: true,
 		sassOptions: {
 			logger: {
-				warn: (message) => console.warn(message),
-				debug: (message) => console.log(message),
+				warn: message => console.warn(message),
+				debug: message => console.log(message),
 			},
 		},
 		skipTrailingSlashRedirect: true,
