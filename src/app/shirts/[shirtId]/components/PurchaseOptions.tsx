@@ -1,14 +1,10 @@
 "use client";
-import { useState } from "react";
+import { setUrlState } from "@utils";
+import { useRouter, useSearchParams } from "next/navigation";
 import styles from "../styles.module.scss";
 
 export interface PurchaseOptionsProps {
 	colors: string[];
-}
-
-interface Choices {
-	color: string;
-	size: string;
 }
 
 const sizes = ["P", "M", "G", "GG", "XG", "XGG"];
@@ -33,22 +29,18 @@ const colorAssoc: Record<string, ColorAssociations> = {
 };
 
 export function PurchaseOptions({ colors }: PurchaseOptionsProps) {
-	const [choices, setChoices] = useState<Choices>({ color: "", size: "M" });
+	const { replace } = useRouter();
+	const choices = useSearchParams();
 
 	return (
 		<div className={styles.purchaseOptions}>
 			<div className={styles.sizesAvailable}>
-				{sizes.map((size, i) => (
+				{sizes.map(size => (
 					<button
 						key={size}
 						type="button"
-						onClick={() =>
-							setChoices(old => ({
-								...old,
-								size: old.size === size ? "" : size,
-							}))
-						}
-						style={{ backgroundColor: choices.size === size ? "#444" : "transparent" }}
+						onClick={() => replace(setUrlState("size", size))}
+						style={{ backgroundColor: choices.get("size") === size ? "#444" : "transparent" }}
 					>
 						{size}
 					</button>
@@ -63,14 +55,9 @@ export function PurchaseOptions({ colors }: PurchaseOptionsProps) {
 						<button
 							key={color}
 							type="button"
-							onClick={() =>
-								setChoices(old => ({
-									...old,
-									color: old.color === color ? "" : color,
-								}))
-							}
+							onClick={() => replace(setUrlState("color", color))}
 							style={{
-								backgroundColor: choices.color === color ? active : background,
+								backgroundColor: choices.get("color") === color ? active : background,
 								color: text,
 							}}
 						>

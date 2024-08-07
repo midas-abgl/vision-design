@@ -57,6 +57,12 @@
 	h4 {
 		color: #555;
 	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
 }
 
 .purchaseOptions {
@@ -91,5 +97,12 @@
 		display: flex;
 		align-items: center;
 		gap: 0.25rem;
+	}
+}
+
+.purchaseModal {
+	div {
+		display: flex;
+		flex-direction: column;
 	}
 }

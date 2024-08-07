@@ -8,7 +8,7 @@
 		"prisma:generate": "prisma generate",
 		"prisma:migrate": "prisma migrate dev --create-only",
 		"prisma:migrate_dev": "prisma migrate dev",
-		"prisma:migrate_deploy": "prisma migrate deploy",
+		"prisma:migrate_deploy": "prisma migrate deploy && npm run prisma:generate",
 		"prepare": "git config --local core.hooksPath .githooks && npm run prisma:generate",
 		"start": "next start"
 	},

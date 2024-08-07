@@ -12,10 +12,10 @@
 			"@components/*": ["components/*"],
 			"@context/*": ["context/*"],
 			"@database": ["database"],
-			"@hooks/*": ["hooks/*"],
+			"@hooks": ["hooks"],
 			"@public/*": ["../public/*"],
 			"@services/*": ["services/*"],
-			"@utils/*": ["utils/*"]
+			"@utils": ["utils"]
 		},
 		"strictNullChecks": true,
 		"target": "ES6",

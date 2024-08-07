@@ -13,7 +13,7 @@ export default function ShirtTile({ shirt }: ShirtTileProps) {
 
 	return (
 		<div key={shirt.id} className={styles.shirtTile}>
-			<Image alt={`Camiseta ${model}`} src={photos[0]} width={230} height={286} />
+			<Image alt="" src={photos[0]} width={230} height={286} />
 
 			<h4>{model}</h4>
 
