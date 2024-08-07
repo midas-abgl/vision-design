@@ -1,4 +1,5 @@
-import prisma from "@database";
+import type { Shirt } from "@types";
+import { getApi } from "@utils";
 import { notFound } from "next/navigation";
 import { PhotoSlideshow, Pricing, PurchaseOptions, SizeTable } from "./components";
 import PurchaseButton from "./components/PurchaseButton";
@@ -11,7 +12,7 @@ export interface ShirtPageProps {
 }
 
 export default async function ShirtPage({ params: { shirtId } }: ShirtPageProps) {
-	const shirt = await prisma.shirt.findUnique({ where: { id: shirtId } });
+	const shirt = await getApi<Shirt>(`/api/shirts?id=${shirtId}`);
 	if (!shirt) {
 		notFound();
 	}
