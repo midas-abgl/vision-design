@@ -1,4 +1,3 @@
-import type { Shirt } from "@prisma/client";
 import { getApi } from "@utils";
 import { notFound } from "next/navigation";
 import { PhotoSlideshow, Pricing, PurchaseOptions, SizeTable } from "./components";
@@ -33,7 +32,7 @@ export default async function ShirtPage({ params: { shirtId } }: ShirtPageProps)
 
 				<SizeTable />
 
-				<Pricing prices={prices.map(price => price.toNumber())} />
+				<Pricing prices={prices} />
 
 				<PurchaseButton />
 			</section>

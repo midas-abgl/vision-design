@@ -1,4 +1,3 @@
-import type { Shirt } from "@prisma/client";
 import { getApi } from "@utils";
 import ShirtTile from "./components/ShirtTile";
 import styles from "./styles.module.scss";

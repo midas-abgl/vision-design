@@ -1,7 +1,7 @@
-import type { Prisma } from "@prisma/client";
 import { getApi } from "@utils";
 import Image from "next/image";
 import { createStaticPix, hasError } from "pix-utils";
+import { ReceiptInput } from "./components";
 import styles from "./styles.module.scss";
 
 export interface ShirtOrderProps {
@@ -11,18 +11,15 @@ export interface ShirtOrderProps {
 }
 
 export default async function ShirtOrder({ params: { orderId } }: ShirtOrderProps) {
-	const order = await getApi<Prisma.ShirtOrderGetPayload<{ include: { shirt: true } }>>(
-		`/shirts/orders?id=${orderId}`,
-	);
-	console.log(order);
-	const { manufacturingPrice: price } = order.shirt;
+	const order = await getApi<ShirtOrder>(`/shirts/orders?id=${orderId}`);
+	const { manufacturingPrice: price } = order.shirt!;
 
 	const pix = createStaticPix({
-		infoAdicional: `Camisa - modelo ${order.shirt.model}, tamanho ${order.size}, cor ${order.color}. Pedido ${orderId}`,
+		infoAdicional: `Pedido ${orderId} (camisa)`,
 		merchantCity: "João Pessoa",
 		merchantName: "Vision Design",
 		pixKey: "46351012000161",
-		transactionAmount: price.toNumber(),
+		transactionAmount: price,
 	});
 	if (hasError(pix)) {
 		throw new Error("Erro ao gerar pix.");
@@ -33,7 +30,7 @@ export default async function ShirtOrder({ params: { orderId } }: ShirtOrderProp
 	return (
 		<div className={styles.container}>
 			<div className={styles.orderInfo}>
-				<span>Valor inicial: R${price.toNumber().toLocaleString()}</span>
+				<span>Valor inicial: R${price.toLocaleString()}</span>
 				<p>
 					Esse valor é um compromisso de compra. Nós já registramos seu interesse e você pode pagá-lo
 					posteriormente. Tenha em mente que normalmente fechamos um lote para confecção a cada 2 semanas,
@@ -65,6 +62,8 @@ export default async function ShirtOrder({ params: { orderId } }: ShirtOrderProp
 					{pix.toBRCode()}
 				</span>
 			</div>
+
+			<ReceiptInput />
 		</div>
 	);
 }
