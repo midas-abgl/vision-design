@@ -1,11 +1,14 @@
 "use client";
 import { Modal } from "@hyoretsu/react-components";
-import type { Prisma } from "@prisma/client";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import styles from "../styles.module.scss";
 
-type ClientData = Prisma.ClientCreateInput;
+type ClientData = {
+	email: string;
+	name: string;
+	phoneNumber: string;
+};
 
 export default function PurchaseButton() {
 	const { shirtId } = useParams();

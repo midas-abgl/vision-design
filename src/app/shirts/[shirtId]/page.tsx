@@ -1,4 +1,3 @@
-import type { Shirt } from "@types";
 import { getApi } from "@utils";
 import { notFound } from "next/navigation";
 import { PhotoSlideshow, Pricing, PurchaseOptions, SizeTable } from "./components";
@@ -12,7 +11,7 @@ export interface ShirtPageProps {
 }
 
 export default async function ShirtPage({ params: { shirtId } }: ShirtPageProps) {
-	const shirt = await getApi<Shirt>(`/api/shirts?id=${shirtId}`);
+	const shirt = await getApi<Shirt>(`/shirts?id=${shirtId}`);
 	if (!shirt) {
 		notFound();
 	}

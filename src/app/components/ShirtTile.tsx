@@ -1,6 +1,5 @@
 import ColorCircle from "@components/ColorCircle";
 import { Link } from "@hyoretsu/react-components";
-import type { Shirt } from "@types";
 import Image from "next/image";
 import styles from "../styles.module.scss";
 

@@ -12,6 +12,7 @@
 			"@components/*": ["components/*"],
 			"@context/*": ["context/*"],
 			"@database": ["database"],
+			"@entities": ["entities"],
 			"@hooks": ["hooks"],
 			"@public/*": ["../public/*"],
 			"@services/*": ["services/*"],

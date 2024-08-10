@@ -1,10 +1,9 @@
-import type { Shirt } from "@types";
 import { getApi } from "@utils";
 import ShirtTile from "./components/ShirtTile";
 import styles from "./styles.module.scss";
 
 export default async function Home() {
-	const models = await getApi<Shirt[]>("/api/shirts");
+	const models = await getApi<Shirt[]>("/shirts");
 
 	return (
 		<div className={styles.container}>

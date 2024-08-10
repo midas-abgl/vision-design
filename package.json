@@ -19,11 +19,13 @@
 		"**/*.(js|jsx|json|jsonc|ts|tsx)": ["biome check --apply"]
 	},
 	"dependencies": {
+		"@aws-sdk/client-s3": "^3.627.0",
 		"@hyoretsu/react-components": "^1.7.12",
 		"@hyoretsu/utils": "^1.13.0",
 		"@prisma/client": "^5.17.0",
 		"kysely": "^0.27.4",
 		"next": "^14.2.5",
+		"pix-utils": "^2.5.0",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-icons": "^5.2.1",
