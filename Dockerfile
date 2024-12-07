@@ -12,10 +12,9 @@ RUN apt-get update -y && apt-get install -y openssl
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-
-COPY --from=node:18 /usr/local/bin/node /usr/local/bin/node
-RUN bun prisma:generate
+COPY ./public ./public
+COPY ./src ./src
+COPY  ./next.config.js ./package.json ./postcss.config.js tailwind.config.js tsconfig.json ./
 
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN bun run build

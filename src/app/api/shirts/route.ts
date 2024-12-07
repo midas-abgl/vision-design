@@ -1,5 +1,4 @@
 import { database } from "@database";
-import { sql } from "kysely";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
