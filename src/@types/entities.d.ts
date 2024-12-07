@@ -5,9 +5,9 @@ interface Shirt {
 	prices: number[];
 	photos: string[];
 	colors: string[];
-	createdAt: Date;
-	updatedAt: Date;
 }
+
+type ShirtListing = Record<string, Omit<Shirt, "id" | "manufacturingPrice">>;
 
 interface ShirtOrder {
 	id: string;

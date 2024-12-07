@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import styles from "./styles.module.scss";
+import styles from "./not-found.module.scss";
 
 export const metadata: Metadata = {
 	robots: {

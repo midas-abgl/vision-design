@@ -1,43 +1,19 @@
-import { PrismaClient } from "@prisma/client";
+import { Kysely, PostgresDialect } from "kysely";
+import { Pool, types } from "pg";
+import type { DB } from "./types";
 
-const prismaClientSingleton = () => {
-	return new PrismaClient().$extends({
-		result: {
-			shirt: {
-				manufacturingPrice: {
-					compute({ manufacturingPrice }) {
-						return manufacturingPrice.toNumber();
-					},
-				},
-				prices: {
-					compute({ prices }) {
-						return prices.map(price => price.toNumber());
-					},
-				},
-			},
-			shirtOrder: {
-				downPayment: {
-					compute({ downPayment }) {
-						return downPayment.toNumber();
-					},
-				},
-				finalPayment: {
-					compute({ finalPayment }) {
-						return finalPayment?.toNumber();
-					},
-				},
-			},
+types.setTypeParser(types.builtins.NUMERIC, val => Number(val));
+
+const dialect = new PostgresDialect({
+	pool: new Pool({
+		connectionString: process.env.DATABASE_URL,
+		max: 25,
+		ssl: {
+			rejectUnauthorized: false,
 		},
-	});
-};
+	}),
+});
 
-// biome-ignore lint/suspicious/noShadowRestrictedNames: Recommended Prisma way
-declare const globalThis: {
-	prismaGlobal: ReturnType<typeof prismaClientSingleton>;
-} & typeof global;
-
-const prisma = globalThis.prismaGlobal ?? prismaClientSingleton();
-
-export default prisma;
-
-if (process.env.NODE_ENV !== "production") globalThis.prismaGlobal = prisma;
+export const database = new Kysely<DB>({
+	dialect,
+});

@@ -1,6 +1,8 @@
 import type { PropsWithChildren } from "react";
-import WebVitals from "./components/WebVitals";
+import { WebVitals } from "./components";
+import { Providers } from "./providers";
 
+import "@fontsource/roboto";
 import "./_global.scss";
 
 const siteName = "Vision Design - by Midas";
@@ -39,7 +41,7 @@ export const viewport = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang="en" className="dark text-foreground bg-background" suppressHydrationWarning>
 			<head>
 				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 				<link rel="icon" type="image/png" href="/favicon.png" />
@@ -47,7 +49,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
 				<meta name="theme-color" content={viewport.themeColor} />
 			</head>
 			<body>
-				<main style={{ flex: 1, padding: "20px" }}>{children}</main>
+				<main style={{ flex: 1, padding: "20px" }}>
+					<Providers>{children}</Providers>
+				</main>
 
 				{process.env.NODE_ENV === "production" && <WebVitals />}
 			</body>

@@ -1,15 +1,15 @@
 import { getApi } from "@utils";
-import ShirtTile from "./components/ShirtTile";
+import { ShirtSelection, SizeSelection } from "./components";
 import styles from "./styles.module.scss";
 
 export default async function Home() {
-	const models = await getApi<Shirt[]>("/shirts");
+	const models = await getApi<ShirtListing>("/shirts");
 
 	return (
 		<div className={styles.container}>
-			{models.map(shirt => (
-				<ShirtTile key={shirt.id} shirt={shirt} />
-			))}
+			<ShirtSelection models={models} />
+
+			<SizeSelection />
 		</div>
 	);
 }

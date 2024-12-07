@@ -1,27 +1,9 @@
-.notFound {
+.container {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-
-	svg {
-		color: #f00;
-		width: auto;
-		height: 20%;
-	}
-
-	span {
-		font-size: 2em;
-	}
-}
-
-.container {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
 	justify-content: center;
 	align-items: center;
-	padding: 0 15vw;
+	gap: 1rem;
 }
 
 .shirtTile {
