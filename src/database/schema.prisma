@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Client {
-    id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    id          String       @id @default(dbgenerated("generate_tsid('Client')")) @db.Uuid
     name        String       @db.VarChar(50)
     email       String       @unique @db.VarChar(320)
     phoneNumber String       @db.VarChar(15)
@@ -18,7 +18,7 @@ model Client {
 }
 
 model Shirt {
-    id                 String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    id                 String       @id @default(dbgenerated("generate_tsid('Shirt')")) @db.Uuid
     model              String       @db.VarChar(50)
     manufacturingPrice Decimal      @default(36) @db.Decimal(4, 2)
     prices             Decimal[]    @db.Decimal(4, 2)
@@ -30,7 +30,7 @@ model Shirt {
 }
 
 model ShirtBatch {
-    id         String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    id         String       @id @default(dbgenerated("generate_tsid('ShirtBatch')")) @db.Uuid
     orderedAt  DateTime     @db.Date
     receivedAt DateTime?    @db.Date
     shirts     ShirtOrder[]
@@ -39,7 +39,7 @@ model ShirtBatch {
 }
 
 model ShirtOrder {
-    id           String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    id           String      @id @default(dbgenerated("generate_tsid('ShirtOrder')")) @db.Uuid
     clientId     String      @db.Uuid
     client       Client      @relation(fields: [clientId], references: [id])
     batchId      String?     @db.Uuid

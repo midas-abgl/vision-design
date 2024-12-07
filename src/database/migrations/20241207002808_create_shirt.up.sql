@@ -1,0 +1,14 @@
+CREATE TABLE "Shirt" (
+	"id" BIGINT PRIMARY KEY DEFAULT generate_tsid('Shirt'),
+	"model" VARCHAR(50) NOT NULL,
+	"manufacturingPrice" DECIMAL(4, 2) NOT NULL,
+	"prices" DECIMAL(4, 2)[] NOT NULL,
+	"photos" VARCHAR(100)[] NOT NULL,
+	"colors" VARCHAR(15)[] NOT NULL,
+	"createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TRIGGER "Shirt_updated_at"
+BEFORE UPDATE ON "Shirt"
+FOR EACH ROW EXECUTE FUNCTION updated_at();

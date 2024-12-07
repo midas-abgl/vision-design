@@ -5,15 +5,12 @@
 		"build": "next build",
 		"dev": "next dev",
 		"export": "next export",
-		"prisma:generate": "prisma generate",
-		"prisma:migrate": "prisma migrate dev --create-only",
-		"prisma:migrate_dev": "prisma migrate dev",
-		"prisma:migrate_deploy": "prisma migrate deploy && npm run prisma:generate",
-		"prepare": "git config --local core.hooksPath .githooks && npm run prisma:generate",
+		"migrate": "migrate create -dir src/database/migrations -ext sql",
+		"migrate_fix": "dotenv -c -- cross-var migrate -path=src/database/migrations -database %DATABASE_URL% -verbose force",
+		"migrate_down": "dotenv -c -- cross-var migrate -path=src/database/migrations -database %DATABASE_URL% -verbose down",
+		"migrate_up": "dotenv -c -- cross-var migrate -path=src/database/migrations -database %DATABASE_URL% -verbose up",
+		"prepare": "git config --local core.hooksPath .githooks",
 		"start": "next start"
-	},
-	"prisma": {
-		"schema": "src/database/schema.prisma"
 	},
 	"lint-staged": {
 		"**/*.(js|jsx|json|jsonc|ts|tsx)": ["biome check --apply"]
@@ -22,10 +19,8 @@
 		"@aws-sdk/client-s3": "^3.627.0",
 		"@hyoretsu/react-components": "^1.7.12",
 		"@hyoretsu/utils": "^1.13.0",
-		"@prisma/client": "^5.17.0",
 		"kysely": "^0.27.4",
 		"next": "^14.2.5",
-		"pix-utils": "^2.5.0",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-icons": "^5.2.1",
@@ -36,12 +31,12 @@
 		"@next/env": "^14.2.5",
 		"@svgr/webpack": "^8.1.0",
 		"@tsconfig/next": "^2.0.3",
-		"@types/node": "latest",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"bun-types": "latest",
+		"cross-var": "^1.1.0",
+		"dotenv-cli": "^7.4.4",
 		"lint-staged": "^15.2.8",
-		"prisma": "^5.17.0",
 		"typescript": "latest"
 	}
 }
