@@ -3,6 +3,13 @@ const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 module.exports = async (phase, { defaultConfig }) => {
 	/** @type {import('next').NextConfig} */
 	const baseConf = {
+		env: {
+			NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+			NEXT_PUBLIC_CDN_URL: process.env.NEXT_PUBLIC_CDN_URL,
+			DATABASE_URL: process.env.DATABASE_URL,
+			S3_ACCESS_KEY: process.env.S3_ACCESS_KEY,
+			S3_SECRET_KEY: process.env.S3_SECRET_KEY,
+		},
 		eslint: {
 			ignoreDuringBuilds: true,
 		},
