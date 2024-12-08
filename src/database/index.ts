@@ -14,6 +14,7 @@ const dialect = new PostgresDialect({
 	}),
 });
 
+export * from "./types";
 export const database = new Kysely<DB>({
 	dialect,
 });

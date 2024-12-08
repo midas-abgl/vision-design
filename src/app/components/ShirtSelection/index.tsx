@@ -1,7 +1,6 @@
 "use client";
 import { Card, CardBody, Image, Select, SelectItem } from "@nextui-org/react";
 import { parseAsString, useQueryStates } from "nuqs";
-import { ColorSelection } from "..";
 
 export interface ShirtSelectionProps {
 	models: ShirtListing;
@@ -12,16 +11,18 @@ export function ShirtSelection({ models }: ShirtSelectionProps) {
 		{
 			baby_look: parseAsString,
 			cor: parseAsString,
-			modelo: parseAsString.withDefault(Object.keys(models)[0]),
+			modelo: parseAsString,
 			tamanho: parseAsString,
 		},
 		{ history: "push" },
 	);
 
-	const currentShirt = models[selectedModel] || Object.values(models)[0];
+	if (!selectedModel) setParams({ modelo: Object.keys(models)[0] });
+
+	const currentShirt = models[selectedModel!];
 
 	return (
-		<>
+		<div className="flex flex-col items-center gap-4">
 			<Select
 				classNames={{
 					base: "w-[20rem]",
@@ -31,13 +32,11 @@ export function ShirtSelection({ models }: ShirtSelectionProps) {
 				}}
 				label={<span className="text-[1rem]">Modelo</span>}
 				labelPlacement="outside"
-				selectedKeys={[selectedModel]}
+				selectedKeys={[selectedModel!]}
 				onChange={e =>
 					setParams({
-						baby_look: null,
 						cor: null,
 						modelo: e.target.value,
-						tamanho: null,
 					})
 				}
 			>
@@ -46,10 +45,10 @@ export function ShirtSelection({ models }: ShirtSelectionProps) {
 				))}
 			</Select>
 
-			<Card>
+			<Card className="rounded-[4rem]">
 				<CardBody className="items-center gap-4">
 					<Image
-						classNames={{ img: "w-[65vw] md:w-[25rem] h-[20vh]" }}
+						classNames={{ img: "w-[65vw] md:w-[30rem] aspect-[1/1.05]" }}
 						alt={currentShirt.model}
 						title={currentShirt.model}
 						src={`${process.env.NEXT_PUBLIC_CDN_URL}/shirts/${selectedModel || Object.keys(models)[0]}/photos/${
@@ -61,10 +60,8 @@ export function ShirtSelection({ models }: ShirtSelectionProps) {
 							]
 						}`}
 					/>
-
-					<ColorSelection colors={currentShirt.colors} />
 				</CardBody>
 			</Card>
-		</>
+		</div>
 	);
 }

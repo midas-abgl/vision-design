@@ -1,49 +1,42 @@
 "use client";
-import { parseAsString, useQueryState } from "nuqs";
-import styles from "./styles.module.scss";
+import { ShirtSection } from "@components";
+import { useQueryState } from "nuqs";
 
 export interface ColorSelectionProps {
-	colors: string[];
+	models: ShirtListing;
 }
 
 const hexCodes = new Map<string, string>([
-	["azul", " #ADD8E6"],
-	["azul escuro", "	#003366"],
-	["branco", " #FFFFFF"],
-	["laranja", " #FFA500"],
-	["preto", "#000000"],
-	["rosa", " #FF69B4"],
-	["roxo", " #800080"],
-	["verde", " #32CD32"],
-	["vinho", " #800020"],
+	["azul", "#7ed1ef"],
+	["azul escuro", "#17519b"],
+	["branco", "#ffffff"],
+	["laranja", "#ffc300"],
+	["preto", "#434343cc"],
+	["rosa", "#ff69b4"],
+	["roxo", "#9703d188"],
+	["verde", "#32cd32"],
+	["vinho", "#730303"],
 ]);
 
-export function ColorSelection({ colors }: ColorSelectionProps) {
-	const [current, setColor] = useQueryState(
-		"cor",
-		parseAsString.withDefault(Object.keys(colors)[0]).withOptions({ history: "push" }),
-	);
+export function ColorSelection({ models }: ColorSelectionProps) {
+	const [current, setColor] = useQueryState("cor", { history: "push" });
+	const [selectedModel] = useQueryState("modelo");
+
+	if (!selectedModel) return null;
+
+	const { colors } = models[selectedModel];
+
+	if (!current) setColor(colors[0]);
 
 	return (
-		<div className={styles.container}>
-			{colors.map(color => {
-				const backgroundColors = color.split(" e ").map(color => hexCodes.get(color.toLowerCase())!);
-
-				return (
-					<button
-						key={color}
-						type="button"
-						title={color}
-						onClick={() => setColor(color)}
-						style={{
-							background:
-								backgroundColors.length > 1
-									? `linear-gradient( -45deg, ${backgroundColors[1]}, ${backgroundColors[1]} 49%, white 49%, white 51%, ${backgroundColors[0]} 51% )`
-									: backgroundColors[0],
-						}}
-					/>
-				);
-			})}
-		</div>
+		<ShirtSection
+			title="Cores"
+			data={colors}
+			tooltips={colors}
+			columns={6}
+			text={false}
+			backgrounds={colors.map(color => color.split(" e ").map(color => hexCodes.get(color.toLowerCase())!))}
+			state={[current, setColor]}
+		/>
 	);
 }

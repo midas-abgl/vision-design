@@ -9,7 +9,7 @@
 		"paths": {
 			"@app/*": ["app/*"],
 			"@assets/*": ["assets/*"],
-			"@components/*": ["components/*"],
+			"@components": ["components"],
 			"@context/*": ["context/*"],
 			"@database": ["database"],
 			"@entities": ["entities"],

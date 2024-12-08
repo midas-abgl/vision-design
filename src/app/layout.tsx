@@ -2,8 +2,14 @@ import type { PropsWithChildren } from "react";
 import { WebVitals } from "./components";
 import { Providers } from "./providers";
 
-import "@fontsource/roboto";
+import "@fontsource/poppins";
 import "./_global.scss";
+
+// @ts-expect-error: This is a hack
+BigInt.prototype.toJSON = function () {
+	const int = Number.parseInt(this.toString());
+	return int ?? this.toString();
+};
 
 const siteName = "Vision Design - by Midas";
 const url = "https://vision.midas.codes";
@@ -49,7 +55,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 				<meta name="theme-color" content={viewport.themeColor} />
 			</head>
 			<body>
-				<main style={{ flex: 1, padding: "20px" }}>
+				<main>
 					<Providers>{children}</Providers>
 				</main>
 

@@ -1,0 +1,1 @@
+ALTER TABLE "ShirtOrder" ALTER COLUMN "receipts" DROP NOT NULL;

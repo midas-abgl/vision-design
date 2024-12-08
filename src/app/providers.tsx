@@ -9,7 +9,14 @@ export interface ProvidersProps {
 
 export function Providers({ children }: ProvidersProps) {
 	return (
-		<NextUIProvider>
+		<NextUIProvider
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center",
+				minHeight: "100vh",
+			}}
+		>
 			<NuqsAdapter>{children}</NuqsAdapter>
 		</NextUIProvider>
 	);

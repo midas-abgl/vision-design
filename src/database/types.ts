@@ -8,13 +8,13 @@ interface DefaultFields {
 	updatedAt: ColumnType<Date, string | undefined, never>;
 }
 
-interface Client extends DefaultFields {
+export interface Client extends DefaultFields {
 	name: string;
 	email: string;
 	phoneNumber: string;
 }
 
-interface Shirt extends DefaultFields {
+export interface Shirt extends DefaultFields {
 	model: string;
 	manufacturingPrice: number;
 	prices: number[];
@@ -22,18 +22,19 @@ interface Shirt extends DefaultFields {
 	colors: string[];
 }
 
-interface ShirtOrder extends DefaultFields {
+export interface ShirtOrder extends DefaultFields {
 	clientId: string;
 	shirtId: string;
 	size: string;
 	color: string;
 	downPayment: number;
 	finalPayment: number | null;
-	receipts: string[];
-	cancelledAt: Timestamp;
+	receipts: string[] | null;
+	cancelledAt: Timestamp | null;
 	deliveredTo: string | null;
 	deliveredAt: Timestamp | null;
 	expiredAt: Timestamp | null;
+	quantity: number;
 }
 
 export interface DB {
