@@ -1,4 +1,5 @@
 "use client";
+import { AppStoreProvider } from "@context/store";
 import { NextUIProvider } from "@nextui-org/react";
 import { NuqsAdapter } from "nuqs/adapters/next";
 import type { ReactNode } from "react";
@@ -17,7 +18,9 @@ export function Providers({ children }: ProvidersProps) {
 				minHeight: "100vh",
 			}}
 		>
-			<NuqsAdapter>{children}</NuqsAdapter>
+			<NuqsAdapter>
+				<AppStoreProvider>{children}</AppStoreProvider>
+			</NuqsAdapter>
 		</NextUIProvider>
 	);
 }

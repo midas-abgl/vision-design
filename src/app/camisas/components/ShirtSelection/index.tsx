@@ -1,12 +1,17 @@
 "use client";
 import { Card, CardBody, Image, Select, SelectItem } from "@nextui-org/react";
-import { parseAsString, useQueryStates } from "nuqs";
+import { parseAsString, useQueryState, useQueryStates } from "nuqs";
+import { ShirtImage } from "./components";
+import EmblaCarousel from "components/EmblaCarousel";
 
 export interface ShirtSelectionProps {
 	models: ShirtListing;
 }
 
 export function ShirtSelection({ models }: ShirtSelectionProps) {
+	const defaultModel = Object.keys(models)[0];
+
+	const [order] = useQueryState("pedido");
 	const [{ cor: selectedColor, modelo: selectedModel }, setParams] = useQueryStates(
 		{
 			baby_look: parseAsString,
@@ -17,9 +22,17 @@ export function ShirtSelection({ models }: ShirtSelectionProps) {
 		{ history: "push" },
 	);
 
-	if (!selectedModel) setParams({ modelo: Object.keys(models)[0] });
+	if (!selectedModel && !order) setParams({ modelo: defaultModel });
 
-	const currentShirt = models[selectedModel!];
+	const { colors, model, photos } = models[selectedModel || defaultModel];
+
+	const photo =
+		photos[
+			Math.max(
+				colors.findIndex(color => color === selectedColor),
+				0,
+			)
+		];
 
 	return (
 		<div className="flex flex-col items-center gap-4">
@@ -41,25 +54,26 @@ export function ShirtSelection({ models }: ShirtSelectionProps) {
 				}
 			>
 				{Object.entries(models).map(([id, shirt]) => (
-					<SelectItem key={id}>{shirt.model}</SelectItem>
+					<SelectItem className="h-full" key={id}>
+						{shirt.model}
+					</SelectItem>
 				))}
 			</Select>
 
 			<Card className="rounded-[4rem]">
-				<CardBody className="items-center gap-4">
-					<Image
-						classNames={{ img: "w-[65vw] md:w-[30rem] aspect-[1/1.05]" }}
-						alt={currentShirt.model}
-						title={currentShirt.model}
-						src={`${process.env.NEXT_PUBLIC_CDN_URL}/shirts/${selectedModel || Object.keys(models)[0]}/photos/${
-							currentShirt.photos[
-								Math.max(
-									currentShirt.colors.findIndex(color => color === selectedColor),
-									0,
-								)
-							]
-						}`}
-					/>
+				<CardBody className="items-center gap-4 overflow-hidden aspect-[1/1.05] w-[65vw] md:w-[30rem]">
+					<EmblaCarousel>
+						<ShirtImage
+							model={model}
+							modelId={selectedModel || defaultModel}
+							filename={photo.split(".").join("_f.")}
+						/>
+						<ShirtImage
+							model={model}
+							modelId={selectedModel || defaultModel}
+							filename={photo.split(".").join("_v.")}
+						/>
+					</EmblaCarousel>
 				</CardBody>
 			</Card>
 		</div>

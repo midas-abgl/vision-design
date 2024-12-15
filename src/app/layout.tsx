@@ -3,7 +3,9 @@ import { WebVitals } from "./components";
 import { Providers } from "./providers";
 
 import "@fontsource/poppins";
-import "./_global.scss";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "./embla.css";
+import "./global.css";
 
 // @ts-expect-error: This is a hack
 BigInt.prototype.toJSON = function () {

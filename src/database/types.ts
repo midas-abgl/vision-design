@@ -14,6 +14,10 @@ export interface Client extends DefaultFields {
 	phoneNumber: string;
 }
 
+export interface LegalTerms extends DefaultFields {
+	text: string;
+}
+
 export interface Shirt extends DefaultFields {
 	model: string;
 	manufacturingPrice: number;
@@ -29,6 +33,7 @@ export interface ShirtOrder extends DefaultFields {
 	color: string;
 	downPayment: number;
 	finalPayment: number | null;
+	termAccepted?: string;
 	receipts: string[] | null;
 	cancelledAt: Timestamp | null;
 	deliveredTo: string | null;
@@ -39,6 +44,7 @@ export interface ShirtOrder extends DefaultFields {
 
 export interface DB {
 	Client: Client;
+	LegalTerms: LegalTerms;
 	Shirt: Shirt;
 	ShirtOrder: ShirtOrder;
 }

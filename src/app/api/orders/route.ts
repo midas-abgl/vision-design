@@ -1,4 +1,5 @@
 import { database } from "@database";
+import { StatusCodes } from "http-status-codes";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -6,7 +7,7 @@ export async function POST(req: NextRequest) {
 
 	const shirt = await database.selectFrom("Shirt").where("id", "=", shirtId).execute();
 	if (!shirt) {
-		return new Response("Essa camisa não existe.", { status: 404 });
+		return new Response("Essa camisa não existe.", { status: StatusCodes.NOT_FOUND });
 	}
 
 	let client = await database

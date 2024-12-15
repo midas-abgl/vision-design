@@ -1,6 +1,11 @@
 type BooleanString = "true" | "false";
 type ValuesOf<T extends any[]> = T[number];
 
+interface ModalProps {
+	isOpen: boolean;
+	onOpenChange: () => void;
+}
+
 interface PlausibleOpts {
 	/** A function that is called once the event is logged successfully. */
 	callback?: (...args: any[]) => unknown;

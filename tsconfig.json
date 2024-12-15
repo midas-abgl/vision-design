@@ -14,6 +14,7 @@
 			"@database": ["database"],
 			"@entities": ["entities"],
 			"@hooks": ["hooks"],
+			"@lib/*": ["lib/*"],
 			"@public/*": ["../public/*"],
 			"@services/*": ["services/*"],
 			"@utils": ["utils"]
@@ -22,6 +23,11 @@
 		"target": "ES6",
 		"typeRoots": ["./node_modules/@types", "src/@types"]
 	},
-	"include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx", ".next/types/**/*.ts"],
+	"include": [
+		"next-env.d.ts",
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		".next/types/**/*.ts"
+	],
 	"exclude": ["node_modules"]
 }

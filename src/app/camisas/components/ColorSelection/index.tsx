@@ -1,6 +1,6 @@
 "use client";
 import { ShirtSection } from "@components";
-import { useQueryState } from "nuqs";
+import { parseAsString, useQueryState } from "nuqs";
 
 export interface ColorSelectionProps {
 	models: ShirtListing;
@@ -19,18 +19,21 @@ const hexCodes = new Map<string, string>([
 ]);
 
 export function ColorSelection({ models }: ColorSelectionProps) {
-	const [current, setColor] = useQueryState("cor", { history: "push" });
-	const [selectedModel] = useQueryState("modelo");
-
-	if (!selectedModel) return null;
+	const [selectedModel] = useQueryState("modelo", parseAsString.withDefault(Object.keys(models)[0]));
 
 	const { colors } = models[selectedModel];
 
-	if (!current) setColor(colors[0]);
+	const [current, setColor] = useQueryState("cor", { history: "push" });
+	const [order] = useQueryState("pedido");
+
+	if (!selectedModel) return null;
+
+	if (!current && !order) setColor(colors[0]);
 
 	return (
 		<ShirtSection
 			title="Cores"
+			titleCentered
 			data={colors}
 			tooltips={colors}
 			columns={6}

@@ -7,15 +7,21 @@ import { PiQuestion } from "react-icons/pi";
 const babySizes = ["PP", "P", "M", "G", "GG", "XGG"];
 const sizes = ["P", "M", "G", "GG", "XGG"];
 
+const defaultValues = {
+	babyLook: "Não",
+	size: "M",
+};
+
 export function SizeSelection() {
 	const [babyLook, setBabyLook] = useQueryState("baby_look", { history: "push" });
+	const [order] = useQueryState("pedido");
 	const [size, setSize] = useQueryState("tamanho", { history: "push" });
 
-	if (!babyLook) setBabyLook("Não");
-	if (!size) setSize("M");
+	if (!size && !order) setSize(defaultValues.size);
+	if (!babyLook && !order) setBabyLook(defaultValues.babyLook);
 
 	return (
-		<div className="flex gap-4">
+		<div className="flex gap-8">
 			<ShirtSection
 				title="Tamanho"
 				icon={<PiQuestion className="w-8 h-8 text-highlight" />}
@@ -23,6 +29,7 @@ export function SizeSelection() {
 				state={[size, setSize]}
 				modalContent={
 					<Image
+						className="w-full"
 						alt="Tabela de tamanhos"
 						title="Tabela de tamanhos"
 						src={`${process.env.NEXT_PUBLIC_CDN_URL}/shirts/size_table.jpg`}
