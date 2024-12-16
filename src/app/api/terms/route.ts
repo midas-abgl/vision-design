@@ -1,6 +1,8 @@
 import { database } from "@database";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
 	const currentTerm = await database
 		.selectFrom("LegalTerms")

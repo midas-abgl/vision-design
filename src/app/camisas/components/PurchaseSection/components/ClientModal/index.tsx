@@ -1,3 +1,4 @@
+"use client";
 import { useAppStore } from "@context/store";
 import {
 	Button,
