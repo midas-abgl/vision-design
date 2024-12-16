@@ -1,10 +1,12 @@
+import "@fontsource/poppins/200.css";
+import "@fontsource/poppins/300.css";
+import "@fontsource/poppins/400.css";
 import type { PropsWithChildren } from "react";
-import { WebVitals } from "./components";
-import { Providers } from "./providers";
-
-import "@fontsource/poppins";
+import { Footer, Header, WebVitals } from "./components";
+import { Background } from "./components/Background";
 import "./embla.css";
 import "./global.css";
+import { Providers } from "./providers";
 
 // @ts-expect-error: This is a hack
 BigInt.prototype.toJSON = function () {
@@ -13,7 +15,7 @@ BigInt.prototype.toJSON = function () {
 };
 
 const siteName = "Vision Design - by Midas";
-const url = "https://vision.midas.codes";
+const url = "https://vd.hyoretsu.com";
 
 export const metadata = {
 	applicationName: siteName,
@@ -21,18 +23,18 @@ export const metadata = {
 		title: siteName,
 	},
 	metadataBase: new URL(url),
-	openGraph: {
-		images: [
-			{
-				url: "/opengraph.jpg",
-				width: 1200,
-				height: 627,
-				alt: siteName,
-			},
-		],
-		siteName,
-		type: "website",
-	},
+	// openGraph: {
+	// 	images: [
+	// 		{
+	// 			url: "/opengraph.jpg",
+	// 			width: 1200,
+	// 			height: 627,
+	// 			alt: siteName,
+	// 		},
+	// 	],
+	// 	siteName,
+	// 	type: "website",
+	// },
 	title: {
 		default: siteName,
 		template: `%s | ${siteName}`,
@@ -48,17 +50,22 @@ export const viewport = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
 	return (
-		<html lang="en" className="dark text-foreground bg-background" suppressHydrationWarning>
+		<html lang="en" className="dark bg-background text-foreground" suppressHydrationWarning>
 			<head>
-				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-				<link rel="icon" type="image/png" href="/favicon.png" />
 				<link rel="manifest" href="/site.webmanifest" />
 				<meta name="theme-color" content={viewport.themeColor} />
 			</head>
-			<body>
-				<main>
-					<Providers>{children}</Providers>
-				</main>
+
+			<body className="relative flex [&>div:first-of-type]:flex [&>div:first-of-type]:flex-1 [&>div:first-of-type]:flex-col [&>div:first-of-type]:justify-between [&>div:first-of-type]:px-24 [&>div:first-of-type]:py-20 [&>div:first-of-type]:backdrop-blur-3xl">
+				<Providers>
+					<Header />
+
+					{children}
+
+					<Footer />
+				</Providers>
+
+				<Background />
 
 				{process.env.NODE_ENV === "production" && <WebVitals />}
 			</body>

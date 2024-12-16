@@ -20,7 +20,18 @@
 		"rules": {
 			"recommended": true,
 			"a11y": {
+				"noSvgWithoutTitle": "warn",
 				"useKeyWithClickEvents": "off"
+			},
+			"nursery": {
+				"useSortedClasses": {
+					"level": "error",
+					"fix": "safe",
+					"options": {
+						"attributes": ["className"],
+						"functions": ["cn"]
+					}
+				}
 			},
 			"security": {
 				"noDangerouslySetInnerHtml": "warn"
@@ -35,5 +46,8 @@
 				"noExplicitAny": "off"
 			}
 		}
+	},
+	"organizeImports": {
+		"enabled": true
 	}
 }

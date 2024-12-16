@@ -14,7 +14,7 @@ export default {
 						content1: "#353535",
 						default: {
 							DEFAULT: "#d9d9d988",
-							foreground: "#ffffff",
+							foreground: "#d9d9d9",
 						},
 					},
 					layout: {},

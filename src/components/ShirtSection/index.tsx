@@ -41,7 +41,7 @@ export function ShirtSection({
 	return (
 		<>
 			<section className={`flex flex-col ${titleCentered ? "items-center" : ""} gap-4`}>
-				<div className="flex items-center gap-2 h-8">
+				<div className="flex h-8 items-center gap-2">
 					<span className="font-semibold text-lg">{title}</span>
 
 					{icon && (
@@ -53,7 +53,9 @@ export function ShirtSection({
 
 				<div
 					className="grid gap-4"
-					style={{ gridTemplateColumns: `repeat(${columns || Math.ceil(data.length / 2)}, 1fr)` }}
+					style={{
+						gridTemplateColumns: `repeat(${columns || Math.ceil(data.length / 2)}, 1fr)`,
+					}}
 				>
 					{data.map((each, i) => {
 						const current = state === each;
@@ -110,7 +112,7 @@ export function ShirtSection({
 			</section>
 
 			{modalContent && (
-				<Modal className="max-w-[60rem]" isOpen={isOpen} onOpenChange={onOpenChange}>
+				<Modal className="max-w-[62rem]" isOpen={isOpen} onOpenChange={onOpenChange}>
 					<ModalContent>
 						<ModalHeader />
 

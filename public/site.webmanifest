@@ -1,11 +1,11 @@
 {
-	"name": "Zaimu",
-	"short_name": "Zaimu",
-	"description": "",
-	"url": "https://zaimu.me/dashboard",
+	"name": "Vision Design",
+	"short_name": "Vision Design",
+	"description": "Brusinhas de qualidade e com um preço justo, venha conferir!",
+	"url": "https://vd.hyoretsu.com",
 	"orientation": "portrait",
 	"display": "standalone",
 	"dir": "ltr",
-	"background_color": "#1e5a70",
-	"theme_color": "#1e5a70"
+	"background_color": "#b1ffff",
+	"theme_color": "#000000"
 }
