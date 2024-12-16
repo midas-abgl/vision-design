@@ -15,9 +15,6 @@ export function ShirtImage({ className, filename, model, modelId }: ShirtImagePr
 			alt={model}
 			title={model}
 			src={`${process.env.NEXT_PUBLIC_CDN_URL}/shirts/${modelId}/photos/${filename}`}
-			style={{
-				...(model.includes("CI/UFPB") ? { scale: 1.2 } : {}),
-			}}
 		/>
 	);
 }
