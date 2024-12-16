@@ -19,7 +19,6 @@ module.exports = async (phase, { defaultConfig }) => {
 		images: {
 			remotePatterns: [{ hostname: "*" }],
 		},
-		output: "standalone",
 		productionBrowserSourceMaps: true,
 		reactStrictMode: true,
 		sassOptions: {

@@ -3,7 +3,6 @@ import { WebVitals } from "./components";
 import { Providers } from "./providers";
 
 import "@fontsource/poppins";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./embla.css";
 import "./global.css";
 
