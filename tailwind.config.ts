@@ -1,6 +1,6 @@
 import { nextui } from "@nextui-org/theme";
+import type { Config } from "tailwindcss";
 
-/** @type { import("tailwindcss").Config } */
 export default {
 	content: ["./src/**/*.{js,ts,jsx,tsx,mdx}", "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"],
 	darkMode: "class",
@@ -18,7 +18,6 @@ export default {
 						},
 					},
 					layout: {},
-					// #32e6f9
 				},
 			},
 		}),
@@ -30,4 +29,4 @@ export default {
 			},
 		},
 	},
-};
+} satisfies Config;

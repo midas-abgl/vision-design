@@ -1,8 +1,8 @@
-const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
+import type { NextConfig } from "next";
+import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
 
-module.exports = async (phase, { defaultConfig }) => {
-	/** @type {import('next').NextConfig} */
-	const baseConf = {
+export default async function (phase: string, { defaultConfig }) {
+	const baseConf: NextConfig = {
 		eslint: {
 			ignoreDuringBuilds: true,
 		},
@@ -24,8 +24,8 @@ module.exports = async (phase, { defaultConfig }) => {
 		reactStrictMode: true,
 		sassOptions: {
 			logger: {
-				warn: message => console.warn(message),
-				debug: message => console.log(message),
+				warn: (message: string) => console.warn(message),
+				debug: (message: string) => console.log(message),
 			},
 		},
 		skipTrailingSlashRedirect: true,
@@ -50,4 +50,4 @@ module.exports = async (phase, { defaultConfig }) => {
 	}
 
 	return baseConf;
-};
+}
