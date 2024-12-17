@@ -11,7 +11,6 @@ import {
 } from "@nextui-org/react";
 import { Clipboard } from "@phosphor-icons/react";
 import { useApi } from "@utils";
-import Image from "next/image";
 import { useQueryState } from "nuqs";
 import { createStaticPix, hasError } from "pix-utils";
 import { type ChangeEvent, useEffect, useRef, useState } from "react";
@@ -99,7 +98,7 @@ export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 
 					<span>ou QR code:</span>
 
-					{qrCode && <Image className="aspect-square w-full" src={qrCode} alt="" width={0} height={0} />}
+					{qrCode && <img className="aspect-square w-full" src={qrCode} alt="" />}
 				</ModalBody>
 
 				<ModalFooter className="w-full justify-center">
