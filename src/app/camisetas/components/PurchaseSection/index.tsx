@@ -4,11 +4,13 @@ import { Handbag } from "@phosphor-icons/react";
 import { useQueryState } from "nuqs";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { ClientModal, PurchaseModal } from "./components";
+import { ClientModal, PaymentModal, TermsModal } from "./components";
 
 export function PurchaseSection() {
 	const [order, setOrder] = useQueryState("pedido", { history: "push" });
 	const [orderStatus, setOrderStatus] = useQueryState("status");
+	const [termsAccepted] = useQueryState("termo_aceito");
+
 	const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure({
 		defaultOpen: !!order,
 		onClose: () => setOrder(null),
@@ -27,6 +29,8 @@ export function PurchaseSection() {
 		}
 	}, [onOpen, order]);
 
+	const props = { isOpen, onClose, onOpenChange };
+
 	return (
 		<>
 			<Button
@@ -39,9 +43,11 @@ export function PurchaseSection() {
 			</Button>
 
 			{!order ? (
-				<ClientModal isOpen={isOpen} onClose={onClose} onOpenChange={onOpenChange} />
+				<ClientModal {...props} />
+			) : !termsAccepted ? (
+				<TermsModal {...props} />
 			) : (
-				<PurchaseModal isOpen={isOpen} onClose={onClose} onOpenChange={onOpenChange} />
+				<PaymentModal {...props} />
 			)}
 		</>
 	);

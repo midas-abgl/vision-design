@@ -1,2 +1,3 @@
 export * from "./ClientModal";
-export * from "./PurchaseModal";
+export * from "./PaymentModal";
+export * from "./TermsModal";
