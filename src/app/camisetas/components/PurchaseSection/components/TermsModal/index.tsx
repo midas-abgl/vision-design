@@ -44,7 +44,7 @@ export function TermsModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 
 	return (
 		<Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-			<ModalContent>
+			<ModalContent className="!max-w-none w-[35rem]">
 				<ModalHeader>Informe seus dados</ModalHeader>
 
 				<ModalBody className="w-full">
@@ -52,6 +52,9 @@ export function TermsModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 						className="whitespace-pre-wrap normal-case"
 						value={term.text.replaceAll("\\n", "\n\n")}
 						isReadOnly
+						style={{
+							height: "20rem",
+						}}
 					/>
 
 					<span className="text-center normal-case">
