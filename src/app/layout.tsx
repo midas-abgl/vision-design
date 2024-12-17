@@ -66,7 +66,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 					<Footer />
 				</Providers>
 
-				<ToastContainer />
+				<ToastContainer className="!*:normal-case" />
 				<Background />
 
 				{process.env.NODE_ENV === "production" && <WebVitals />}
