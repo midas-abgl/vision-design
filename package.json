@@ -25,6 +25,7 @@
 		"@nextui-org/system": "^2.4.2",
 		"@nextui-org/theme": "^2.4.1",
 		"@phosphor-icons/react": "^2.1.7",
+		"@vercel/analytics": "^1.4.1",
 		"embla-carousel-react": "^8.5.1",
 		"framer-motion": "^11.13.1",
 		"kysely": "^0.27.4",
