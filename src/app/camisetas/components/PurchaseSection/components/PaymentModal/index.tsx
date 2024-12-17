@@ -49,7 +49,10 @@ export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 	}, [pix.toImage]);
 
 	const submitReceipt = async (e: ChangeEvent<HTMLInputElement>) => {
-		await useApi("POST", `/orders/${orderId}/send-receipt`, e.target.files![0]);
+		const formData = new FormData();
+		formData.append("receipt", e.target.files![0]);
+
+		await useApi("POST", `/orders/${orderId}/send-receipt`, formData);
 
 		setOrderStatus("successo");
 		setTermsAccepted(null);

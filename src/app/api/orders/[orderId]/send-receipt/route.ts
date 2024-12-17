@@ -12,7 +12,11 @@ export async function POST(req: NextRequest, { params }: DynamicSegments<Params>
 		return new NextResponse("Pedido não encontrado", { status: StatusCodes.NOT_FOUND });
 	}
 
-	const receipt = await req.blob();
+	const receipt = (await req.formData()).get("receipt") as File | null;
+
+	if (!receipt) {
+		return new NextResponse("Nenhum comprovante enviado", { status: StatusCodes.BAD_REQUEST });
+	}
 
 	const s3Client = new S3Client({
 		credentials: {
