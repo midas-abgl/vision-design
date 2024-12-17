@@ -16,8 +16,8 @@ export async function POST(req: NextRequest, { params }: DynamicSegments<Params>
 
 	const s3Client = new S3Client({
 		credentials: {
-			accessKeyId: process.env.S3_ACCESS_KEY!,
-			secretAccessKey: process.env.S3_SECRET_KEY!,
+			accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+			secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
 		},
 		region: "us-east-2",
 	});

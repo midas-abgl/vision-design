@@ -26,7 +26,7 @@ export default async function Home() {
 					<div className="flex flex-col items-center gap-4">
 						<PriceSection models={models} />
 
-						<PurchaseSection />
+						<PurchaseSection models={models} />
 					</div>
 				</section>
 			</div>

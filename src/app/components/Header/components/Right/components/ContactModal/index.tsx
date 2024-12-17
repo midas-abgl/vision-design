@@ -1,4 +1,5 @@
 "use client";
+import team from "@app/contact.json";
 import { Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/react";
 import type { ReactNode } from "react";
 
@@ -6,15 +7,6 @@ export interface ContactModalProps {
 	isOpen: boolean;
 	onOpenChange: () => void;
 }
-
-const team = {
-	"Aran Leite": {
-		Celular: "(83) 99613-3794",
-	},
-	"Lucas Dantas": {
-		Celular: "(83) 99801-0403",
-	},
-};
 
 export function ContactModal({ isOpen, onOpenChange }: ContactModalProps) {
 	return (

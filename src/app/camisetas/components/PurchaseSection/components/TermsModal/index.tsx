@@ -1,4 +1,6 @@
 "use client";
+import { useAppStore } from "@context/store";
+import { useShallow } from "@lib/storage";
 import {
 	Button,
 	Modal,
@@ -10,28 +12,31 @@ import {
 } from "@nextui-org/react";
 import { useApi } from "@utils";
 import { useQueryState } from "nuqs";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export function TermsModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 	const [, setTermsAccepted] = useQueryState("termo_aceito");
 	const [order] = useQueryState("pedido");
 
-	const [term, setTerm] = useState({ id: "", text: "" });
+	const [terms, setTerms] = useAppStore(useShallow(state => [state.terms, state.setTerms]));
 
 	useEffect(() => {
 		const execute = async () => {
-			const currentTerm = await useApi<LegalTerms>("GET", "/terms");
+			const { id, text } = await useApi<LegalTerms>("GET", "/terms");
 
-			setTerm(currentTerm);
+			setTerms({
+				id,
+				text: text.replaceAll("\\n", "\n\n"),
+			});
 		};
 
 		execute();
-	}, []);
+	}, [setTerms]);
 
 	const acceptTerms = async (acceptance: boolean) => {
 		try {
 			await useApi<string>("PATCH", `/orders/${order}`, {
-				termAccepted: acceptance ? term.id : null,
+				termAccepted: acceptance ? terms.id : null,
 			});
 
 			if (acceptance) {
@@ -50,7 +55,7 @@ export function TermsModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 				<ModalBody className="w-full">
 					<Textarea
 						className="whitespace-pre-wrap normal-case"
-						value={term.text.replaceAll("\\n", "\n\n")}
+						value={terms.text}
 						isReadOnly
 						style={{
 							height: "20rem",
