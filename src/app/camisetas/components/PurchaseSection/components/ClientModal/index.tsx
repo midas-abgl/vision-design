@@ -34,6 +34,7 @@ export function ClientModal({ isOpen, onOpenChange }: ModalProps) {
 						e.preventDefault();
 
 						const client = Object.fromEntries(new FormData(e.currentTarget)) as Client;
+						setClient(client);
 
 						const pedido = await useApi<string>("POST", "/orders", {
 							client,
@@ -42,8 +43,6 @@ export function ClientModal({ isOpen, onOpenChange }: ModalProps) {
 							payment: 52,
 							size,
 						});
-
-						setClient(client);
 
 						setParams({
 							baby_look: null,
