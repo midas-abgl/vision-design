@@ -54,7 +54,7 @@ export function ClientModal({ isOpen, onOpenChange }: ModalProps) {
 					}}
 				>
 					<ModalBody className="w-full [&_input]:normal-case">
-						<Input label="Nome" name="name" defaultValue={storedClient.name} isRequired />
+						<Input label="Nome completo" name="name" defaultValue={storedClient.name} isRequired />
 						<Input label="Email" name="email" type="email" defaultValue={storedClient.email} isRequired />
 						<Input label="Celular" name="phoneNumber" defaultValue={storedClient.phoneNumber} isRequired />
 					</ModalBody>
