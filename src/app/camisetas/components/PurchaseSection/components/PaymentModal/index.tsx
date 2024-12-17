@@ -1,4 +1,8 @@
 "use client";
+import team from "@app/contact.json";
+import { useAppStore } from "@context/store";
+import { sendMail } from "@lib/mail";
+import { useShallow } from "@lib/storage";
 import {
 	Button,
 	Link,
@@ -11,13 +15,29 @@ import {
 } from "@nextui-org/react";
 import { Clipboard } from "@phosphor-icons/react";
 import { useApi } from "@utils";
-import { useQueryState } from "nuqs";
+import { parseAsString, useQueryState, useQueryStates } from "nuqs";
 import { createStaticPix, hasError } from "pix-utils";
 import { type ChangeEvent, useEffect, useRef, useState } from "react";
 
 const creditCardLink = "https://pay.infinitepay.io/vision-design/VC1D-uex66ZqVz-51,99";
 
-export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
+export interface PaymentModalProps extends ModalProps {
+	model: string;
+}
+
+export function PaymentModal({ isOpen, model, onClose, onOpenChange }: PaymentModalProps) {
+	const { email, terms } = useAppStore(
+		useShallow(state => ({
+			email: state.client.email,
+			terms: state.terms.text,
+		})),
+	);
+	const [shirtData] = useQueryStates({
+		baby_look: parseAsString,
+		cor: parseAsString,
+		modelo: parseAsString,
+		tamanho: parseAsString,
+	});
 	const [orderId] = useQueryState("pedido");
 	const [, setOrderStatus] = useQueryState("status");
 	const [, setTermsAccepted] = useQueryState("termo_aceito");
@@ -53,6 +73,16 @@ export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 		formData.append("receipt", e.target.files![0]);
 
 		await useApi("POST", `/orders/${orderId}/send-receipt`, formData);
+
+		await sendMail({
+			body: `Olá! Ficamos felizes que você escolheu comprar conosco.\n\nAqui estão os detalhes da sua compra:\n[Identificador] ${orderId}\n[Estampa] ${model}\n[Cor] ${shirtData.cor}\n[Tamanho] ${shirtData.tamanho}\n[Baby look] ${shirtData.baby_look}\n\nAgora é só aguardar. Iremos enviar mais dois emails, um para avisar quando a remessa for enviada e outro quando ela for recebida.\n\n--------------------------------------------------\n\nPara fins de recordação, segue os termos que foram concordados no ato do pedido.\n\n${terms}\n\n--------------------------------------------------\n\nContato:\n${Object.entries(
+				team,
+			)
+				.map(([member, { Celular }]) => `${member}: ${Celular}`)
+				.join("\n")}`,
+			subject: "[Vision Design] Comprovante de pedido",
+			to: email,
+		});
 
 		setOrderStatus("successo");
 		setTermsAccepted(null);
