@@ -14,8 +14,6 @@ COPY ./public ./public
 COPY ./src ./src
 COPY  ./next.config.js ./package.json ./postcss.config.js tailwind.config.js tsconfig.json ./
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV NEXT_PUBLIC_API_URL='http://vd.hyoretsu.com/api'
-ENV NEXT_PUBLIC_CDN_URL='https://d1j6tgpykvuq4o.cloudfront.net'
 RUN bun run build
 
 # Production image, copy all the files and run next
