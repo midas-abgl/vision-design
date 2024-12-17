@@ -24,18 +24,18 @@ export const metadata = {
 		title: siteName,
 	},
 	metadataBase: new URL(url),
-	// openGraph: {
-	// 	images: [
-	// 		{
-	// 			url: "/opengraph.jpg",
-	// 			width: 1200,
-	// 			height: 627,
-	// 			alt: siteName,
-	// 		},
-	// 	],
-	// 	siteName,
-	// 	type: "website",
-	// },
+	openGraph: {
+		images: [
+			{
+				url: "/opengraph.png",
+				width: 1200,
+				height: 627,
+				alt: siteName,
+			},
+		],
+		siteName,
+		type: "website",
+	},
 	title: {
 		default: siteName,
 		template: `%s | ${siteName}`,
