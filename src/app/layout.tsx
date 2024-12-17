@@ -70,7 +70,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 					<Footer />
 				</Providers>
 
-				<ToastContainer className="!*:normal-case" />
+				<ToastContainer toastClassName="!*:normal-case" />
 				<Analytics />
 				<Background />
 
