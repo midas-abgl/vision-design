@@ -23,7 +23,7 @@ export function ColorSelection({ models }: ColorSelectionProps) {
 
 	const { colors } = models[selectedModel];
 
-	const [current, setColor] = useQueryState("cor", { history: "push" });
+	const [current, setColor] = useQueryState("cor");
 	const [order] = useQueryState("pedido");
 
 	if (!selectedModel) return null;

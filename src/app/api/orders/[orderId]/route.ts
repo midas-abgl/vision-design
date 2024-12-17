@@ -1,12 +1,9 @@
 import { database } from "@database";
-import { type NextRequest, NextResponse } from "next/server";
 import { StatusCodes } from "http-status-codes";
+import { type NextRequest, NextResponse } from "next/server";
+import type { Params } from "./types";
 
-interface PatchArgs {
-	params: Promise<{ orderId: string }>;
-}
-
-export async function PATCH(req: NextRequest, { params }: PatchArgs) {
+export async function PATCH(req: NextRequest, { params }: DynamicSegments<Params>) {
 	const { orderId } = await params;
 
 	const order = await database.selectFrom("ShirtOrder").where("id", "=", orderId).executeTakeFirst();

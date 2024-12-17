@@ -12,9 +12,9 @@ import { useApi } from "@utils";
 import { useQueryState } from "nuqs";
 import { useEffect, useState } from "react";
 
-export function TermsModal({ isOpen, onOpenChange }: ModalProps) {
-	const [, setTermsAccepted] = useQueryState("termo_aceito", { history: "push" });
-	const [order, setOrder] = useQueryState("pedido", { history: "push" });
+export function TermsModal({ isOpen, onClose, onOpenChange }: ModalProps) {
+	const [, setTermsAccepted] = useQueryState("termo_aceito");
+	const [order] = useQueryState("pedido");
 
 	const [term, setTerm] = useState({ id: "", text: "" });
 
@@ -36,6 +36,8 @@ export function TermsModal({ isOpen, onOpenChange }: ModalProps) {
 
 			if (acceptance) {
 				setTermsAccepted("Sim");
+			} else {
+				onClose();
 			}
 		} catch {}
 	};
@@ -46,11 +48,11 @@ export function TermsModal({ isOpen, onOpenChange }: ModalProps) {
 				<ModalHeader>Informe seus dados</ModalHeader>
 
 				<ModalBody className="w-full">
-					<Textarea className="normal-case" value={term.text.replaceAll("\\n", "<br /><br />")} isReadOnly />
-					{/* <span
-						className="max-h-64 normal-case bg-default-100 px-4 py-2 rounded-xl overflow-auto"
-						dangerouslySetInnerHTML={{ __html: term.text.replaceAll("\\n", "<br /><br />") }}
-					/> */}
+					<Textarea
+						className="whitespace-pre-wrap normal-case"
+						value={term.text.replaceAll("\\n", "\n\n")}
+						isReadOnly
+					/>
 
 					<span className="text-center normal-case">
 						Ao clicar em "Aceitar", o comprador reconhece e concorda com os termos estabelecidos acima.

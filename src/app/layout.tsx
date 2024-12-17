@@ -2,6 +2,7 @@ import "@fontsource/poppins/200.css";
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
 import type { PropsWithChildren } from "react";
+import { ToastContainer } from "react-toastify";
 import { Footer, Header, WebVitals } from "./components";
 import { Background } from "./components/Background";
 import "./embla.css";
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 					<Footer />
 				</Providers>
 
+				<ToastContainer />
 				<Background />
 
 				{process.env.NODE_ENV === "production" && <WebVitals />}

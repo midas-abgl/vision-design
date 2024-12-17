@@ -1,0 +1,47 @@
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { database } from "@database";
+import { StatusCodes } from "http-status-codes";
+import { type NextRequest, NextResponse } from "next/server";
+import type { Params } from "../types";
+
+export async function POST(req: NextRequest, { params }: DynamicSegments<Params>) {
+	const { orderId } = await params;
+
+	const order = await database.selectFrom("ShirtOrder").where("id", "=", orderId).executeTakeFirst();
+	if (!order) {
+		return new NextResponse("Pedido não encontrado", { status: StatusCodes.NOT_FOUND });
+	}
+
+	const receipt = await req.blob();
+
+	const s3Client = new S3Client({
+		credentials: {
+			accessKeyId: process.env.S3_ACCESS_KEY!,
+			secretAccessKey: process.env.S3_SECRET_KEY!,
+		},
+		region: "us-east-2",
+	});
+
+	const ContentType = receipt.type;
+	const Key = `shirts/receipts/${orderId}/down.${ContentType.split("/")[1]}`;
+
+	await Promise.all([
+		s3Client.send(
+			new PutObjectCommand({
+				Bucket: "vision-design",
+				Key,
+				Body: Buffer.from(await receipt.arrayBuffer()),
+				ContentType,
+			}),
+		),
+		database
+			.updateTable("ShirtOrder")
+			.set({
+				payments: [true],
+			})
+			.where("id", "=", orderId)
+			.execute(),
+	]);
+
+	return NextResponse.json(null);
+}

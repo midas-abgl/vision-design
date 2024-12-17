@@ -1,6 +1,6 @@
 "use client";
 import { EmblaCarousel } from "@components";
-import { Card, CardBody, Image, Select, SelectItem } from "@nextui-org/react";
+import { Card, CardBody, Select, SelectItem } from "@nextui-org/react";
 import { parseAsString, useQueryState, useQueryStates } from "nuqs";
 import { ShirtImage } from "./components";
 
@@ -12,15 +12,12 @@ export function ShirtSelection({ models }: ShirtSelectionProps) {
 	const defaultModel = Object.keys(models)[0];
 
 	const [order] = useQueryState("pedido");
-	const [{ cor: selectedColor, modelo: selectedModel }, setParams] = useQueryStates(
-		{
-			baby_look: parseAsString,
-			cor: parseAsString,
-			modelo: parseAsString,
-			tamanho: parseAsString,
-		},
-		{ history: "push" },
-	);
+	const [{ cor: selectedColor, modelo: selectedModel }, setParams] = useQueryStates({
+		baby_look: parseAsString,
+		cor: parseAsString,
+		modelo: parseAsString,
+		tamanho: parseAsString,
+	});
 
 	if (!selectedModel && !order) setParams({ modelo: defaultModel });
 

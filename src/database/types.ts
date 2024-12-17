@@ -34,7 +34,7 @@ export interface ShirtOrder extends DefaultFields {
 	downPayment: number;
 	finalPayment: number | null;
 	termAccepted?: string;
-	receipts: string[] | null;
+	payments: boolean[] | null;
 	cancelledAt: Timestamp | null;
 	deliveredTo: string | null;
 	deliveredAt: Timestamp | null;

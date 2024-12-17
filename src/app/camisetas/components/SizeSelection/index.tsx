@@ -13,9 +13,9 @@ const defaultValues = {
 };
 
 export function SizeSelection() {
-	const [babyLook, setBabyLook] = useQueryState("baby_look", { history: "push" });
+	const [babyLook, setBabyLook] = useQueryState("baby_look");
 	const [order] = useQueryState("pedido");
-	const [size, setSize] = useQueryState("tamanho", { history: "push" });
+	const [size, setSize] = useQueryState("tamanho");
 
 	if (!size && !order) setSize(defaultValues.size);
 	if (!babyLook && !order) setBabyLook(defaultValues.babyLook);

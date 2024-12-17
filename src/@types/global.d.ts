@@ -3,7 +3,12 @@ type ValuesOf<T extends any[]> = T[number];
 
 interface ModalProps {
 	isOpen: boolean;
+	onClose: () => void;
 	onOpenChange: () => void;
+}
+
+interface DynamicSegments<T> {
+	params: Promise<T>;
 }
 
 interface PlausibleOpts {

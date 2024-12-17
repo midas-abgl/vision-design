@@ -3,14 +3,23 @@ import { Button, useDisclosure } from "@nextui-org/react";
 import { Handbag } from "@phosphor-icons/react";
 import { useQueryState } from "nuqs";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 import { ClientModal, PurchaseModal } from "./components";
 
 export function PurchaseSection() {
 	const [order, setOrder] = useQueryState("pedido", { history: "push" });
-	const { isOpen, onOpen, onOpenChange } = useDisclosure({
+	const [orderStatus, setOrderStatus] = useQueryState("status");
+	const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure({
 		defaultOpen: !!order,
 		onClose: () => setOrder(null),
 	});
+
+	useEffect(() => {
+		if (orderStatus === "successo") {
+			toast("Compra realizada com sucesso!", { toastId: "order-success", type: "success" });
+			setOrderStatus(null);
+		}
+	}, [orderStatus, setOrderStatus]);
 
 	useEffect(() => {
 		if (order) {
@@ -30,9 +39,9 @@ export function PurchaseSection() {
 			</Button>
 
 			{!order ? (
-				<ClientModal isOpen={isOpen} onOpenChange={onOpenChange} />
+				<ClientModal isOpen={isOpen} onClose={onClose} onOpenChange={onOpenChange} />
 			) : (
-				<PurchaseModal isOpen={isOpen} onOpenChange={onOpenChange} />
+				<PurchaseModal isOpen={isOpen} onClose={onClose} onOpenChange={onOpenChange} />
 			)}
 		</>
 	);
