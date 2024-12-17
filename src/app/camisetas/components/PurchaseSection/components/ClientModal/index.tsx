@@ -17,7 +17,6 @@ export function ClientModal({ isOpen, onOpenChange }: ModalProps) {
 	const { client: storedClient, setClient } = useAppStore(state => state);
 
 	const [{ cor: color, modelo: modelId, tamanho: size }, setParams] = useQueryStates({
-		baby_look: parseAsString,
 		cor: parseAsString,
 		modelo: parseAsString,
 		pedido: parseAsString,
@@ -45,11 +44,7 @@ export function ClientModal({ isOpen, onOpenChange }: ModalProps) {
 						});
 
 						setParams({
-							baby_look: null,
-							cor: null,
-							modelo: null,
 							pedido,
-							tamanho: null,
 						});
 					}}
 				>
