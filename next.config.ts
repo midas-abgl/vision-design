@@ -7,6 +7,7 @@ export default async function (phase: string, { defaultConfig }) {
 			ignoreDuringBuilds: true,
 		},
 		experimental: {
+			reactCompiler: true,
 			turbo: {
 				rules: {
 					"*.svg": {

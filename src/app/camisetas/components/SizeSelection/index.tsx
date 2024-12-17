@@ -3,6 +3,7 @@ import { ShirtSection } from "@components";
 import { Image } from "@nextui-org/react";
 import { Question } from "@phosphor-icons/react";
 import { useQueryState } from "nuqs";
+import { useEffect } from "react";
 
 const babySizes = ["PP", "P", "M", "G", "GG", "XGG"];
 const sizes = ["P", "M", "G", "GG", "XGG"];
@@ -17,8 +18,16 @@ export function SizeSelection() {
 	const [order] = useQueryState("pedido");
 	const [size, setSize] = useQueryState("tamanho");
 
-	if (!size && !order) setSize(defaultValues.size);
-	if (!babyLook && !order) setBabyLook(defaultValues.babyLook);
+	// biome-ignore lint/correctness/useExhaustiveDependencies: intentional
+	useEffect(() => {
+		if (!size && !order) {
+			setSize(defaultValues.size);
+		}
+
+		if (!babyLook && !order) {
+			setBabyLook(defaultValues.babyLook);
+		}
+	}, [order, setBabyLook, setSize]);
 
 	return (
 		<div className="flex gap-8">

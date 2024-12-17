@@ -14,7 +14,7 @@ import { useApi } from "@utils";
 import Image from "next/image";
 import { useQueryState } from "nuqs";
 import { createStaticPix, hasError } from "pix-utils";
-import { type ChangeEvent, useRef, useState } from "react";
+import { type ChangeEvent, useEffect, useRef, useState } from "react";
 
 export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 	const [orderId] = useQueryState("pedido");
@@ -39,11 +39,13 @@ export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 
 	const brCode = pix.toBRCode();
 
-	const generateQrCode = async () => {
-		setQrCode(await pix.toImage());
-	};
+	useEffect(() => {
+		const generateQrCode = async () => {
+			setQrCode(await pix.toImage());
+		};
 
-	generateQrCode();
+		generateQrCode();
+	}, [pix.toImage]);
 
 	const submitReceipt = async (e: ChangeEvent<HTMLInputElement>) => {
 		await useApi("POST", `/orders/${orderId}/send-receipt`, e.target.files![0]);
@@ -89,7 +91,7 @@ export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 
 					<span>ou QR code:</span>
 
-					<Image className="aspect-square w-full" src={qrCode} alt="" width={0} height={0} />
+					{qrCode && <Image className="aspect-square w-full" src={qrCode} alt="" width={0} height={0} />}
 				</ModalBody>
 
 				<ModalFooter className="w-full justify-center">
@@ -102,7 +104,7 @@ export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 					/>
 
 					<Button
-						className="flex h-full flex-col py-2 leading-3"
+						className="flex h-full flex-col border-highlight py-2 text-highlight leading-3"
 						type="submit"
 						variant="bordered"
 						onClick={() => fileInputRef.current?.click()}

@@ -1,6 +1,7 @@
 "use client";
 import { ShirtSection } from "@components";
 import { parseAsString, useQueryState } from "nuqs";
+import { useEffect } from "react";
 
 export interface ColorSelectionProps {
 	models: ShirtListing;
@@ -28,7 +29,12 @@ export function ColorSelection({ models }: ColorSelectionProps) {
 
 	if (!selectedModel) return null;
 
-	if (!current && !order) setColor(colors[0]);
+	// biome-ignore lint/correctness/useExhaustiveDependencies: intentional
+	useEffect(() => {
+		if (!current && !order) {
+			setColor(colors[0]);
+		}
+	}, [order, setColor]);
 
 	return (
 		<ShirtSection

@@ -2,6 +2,7 @@
 import { EmblaCarousel } from "@components";
 import { Card, CardBody, Select, SelectItem } from "@nextui-org/react";
 import { parseAsString, useQueryState, useQueryStates } from "nuqs";
+import { useEffect } from "react";
 import { ShirtImage } from "./components";
 
 export interface ShirtSelectionProps {
@@ -19,7 +20,12 @@ export function ShirtSelection({ models }: ShirtSelectionProps) {
 		tamanho: parseAsString,
 	});
 
-	if (!selectedModel && !order) setParams({ modelo: defaultModel });
+	// biome-ignore lint/correctness/useExhaustiveDependencies: intentional
+	useEffect(() => {
+		if (!selectedModel && !order) {
+			setParams({ modelo: defaultModel });
+		}
+	}, [defaultModel, order, setParams]);
 
 	const { colors, model, photos } = models[selectedModel || defaultModel];
 
