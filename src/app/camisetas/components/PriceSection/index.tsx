@@ -1,11 +1,11 @@
 "use client";
 import { useQueryState } from "nuqs";
 
-export interface PurchaseSectionProps {
+export interface PriceSectionProps {
 	models: ShirtListing;
 }
 
-export function PriceSection({ models }: PurchaseSectionProps) {
+export function PriceSection({ models }: PriceSectionProps) {
 	const [modelId] = useQueryState("modelo");
 
 	return (

@@ -31,10 +31,10 @@ export async function GET(req: NextRequest) {
 		.execute();
 
 	return NextResponse.json(
-		shirts.reduce<ShirtListing>((obj, { id, ...shirt }) => {
+		shirts.reduce((obj, { id, ...shirt }) => {
 			obj[id] = shirt;
 
 			return obj;
-		}, {}),
+		}, {} as ShirtListing),
 	);
 }

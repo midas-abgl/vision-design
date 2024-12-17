@@ -34,7 +34,6 @@ export function PurchaseSection({ models }: PurchaseSectionProps) {
 	const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure({
 		defaultOpen: !!order,
 		onClose: async () => {
-			setOrder(null);
 			await sendMail({
 				body: `Olá! Ficamos felizes que você escolheu comprar conosco.\n\nAqui estão os detalhes da sua compra:\n[Identificador] ${order}\n[Estampa] ${models[shirtData.modelo!].model}\n[Cor] ${shirtData.cor}\n[Tamanho] ${shirtData.tamanho}\n[Baby look] ${shirtData.baby_look}\n\nAgora é só aguardar. Iremos enviar mais dois emails, um para avisar quando a remessa for enviada e outro quando ela for recebida.\n\n--------------------------------------------------\n\nPara fins de recordação, segue os termos que foram concordados no ato do pedido.\n\n${terms}\n\n--------------------------------------------------\n\nContato:\n${Object.entries(
 					team,
@@ -44,6 +43,7 @@ export function PurchaseSection({ models }: PurchaseSectionProps) {
 				subject: "[Vision Design] Comprovante de pedido",
 				to: email,
 			});
+			setOrder(null);
 		},
 	});
 
