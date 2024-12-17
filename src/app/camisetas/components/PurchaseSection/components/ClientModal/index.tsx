@@ -34,6 +34,11 @@ export function ClientModal({ isOpen, onOpenChange }: ModalProps) {
 
 						const client = Object.fromEntries(new FormData(e.currentTarget)) as Client;
 						client.email = client.email.toLowerCase();
+
+						if (client.phoneNumber.length === 10) {
+							client.phoneNumber = `${client.phoneNumber.substring(0, 2)}9${client.phoneNumber.substring(2)}`;
+						}
+
 						setClient(client);
 
 						const pedido = await useApi<string>("POST", "/orders", {
