@@ -42,7 +42,7 @@ export function TermsModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 			if (acceptance) {
 				setTermsAccepted("Sim");
 			} else {
-				onClose();
+				onClose?.();
 			}
 		} catch {}
 	};
@@ -50,7 +50,7 @@ export function TermsModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 	return (
 		<Modal isOpen={isOpen} onOpenChange={onOpenChange}>
 			<ModalContent className="!max-w-none w-[35rem]">
-				<ModalHeader>Informe seus dados</ModalHeader>
+				<ModalHeader>Termo de Adesão</ModalHeader>
 
 				<ModalBody className="w-full">
 					<Textarea
@@ -68,10 +68,10 @@ export function TermsModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 				</ModalBody>
 
 				<ModalFooter className="w-full justify-center">
-					<Button variant="bordered" onClick={() => acceptTerms(false)}>
+					<Button variant="bordered" onPress={() => acceptTerms(false)}>
 						Recusar
 					</Button>
-					<Button variant="bordered" onClick={() => acceptTerms(true)}>
+					<Button variant="bordered" onPress={() => acceptTerms(true)}>
 						Aceitar
 					</Button>
 				</ModalFooter>

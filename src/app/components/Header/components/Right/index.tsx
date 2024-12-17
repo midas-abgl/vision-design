@@ -10,7 +10,7 @@ const modals = {
 
 type Modals = keyof typeof modals;
 
-const renderModal = (type: Modals, props: ModalProps) => {
+const renderModal = (type: Modals, props: Omit<ModalProps, "onClose">) => {
 	const Modal = modals[type];
 
 	return <Modal {...props} />;
@@ -31,7 +31,7 @@ export function Right() {
 
 					<PopoverContent>
 						<Listbox>
-							<ListboxItem onClick={() => setModal("contact")}>Contatos</ListboxItem>
+							<ListboxItem onPress={() => setModal("contact")}>Contatos</ListboxItem>
 						</Listbox>
 					</PopoverContent>
 				</Popover>

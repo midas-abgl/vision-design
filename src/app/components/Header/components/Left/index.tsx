@@ -5,7 +5,13 @@ export function Left() {
 	return (
 		<section>
 			<Link href="/">
-				<Image src="/images/logo.png" alt="Logo da Vision Design" width={84} height={60} />
+				<Image
+					className="h-[85%]"
+					src="/images/logo.png"
+					alt="Logo da Vision Design"
+					width={70}
+					height={50}
+				/>
 			</Link>
 		</section>
 	);

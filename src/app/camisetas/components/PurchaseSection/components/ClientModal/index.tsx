@@ -39,7 +39,7 @@ export function ClientModal({ isOpen, onOpenChange }: ModalProps) {
 							client,
 							color,
 							modelId,
-							payment: 52,
+							payment: 51.99,
 							size,
 						});
 

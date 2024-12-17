@@ -15,6 +15,8 @@ import { useQueryState } from "nuqs";
 import { createStaticPix, hasError } from "pix-utils";
 import { type ChangeEvent, useEffect, useRef, useState } from "react";
 
+const creditCardLink = "https://pay.infinitepay.io/vision-design/VC1D-uex66ZqVz-51,99";
+
 export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 	const [orderId] = useQueryState("pedido");
 	const [, setOrderStatus] = useQueryState("status");
@@ -51,7 +53,7 @@ export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 
 		setOrderStatus("successo");
 		setTermsAccepted(null);
-		onClose();
+		onClose?.();
 	};
 
 	return (
@@ -61,12 +63,12 @@ export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 
 				<ModalBody className="w-full">
 					<span>Cartão:</span>
-					<Link
-						className="mx-auto"
-						href="https://pay.infinitepay.io/vision-design/VC1D-uex66ZqVz-51,99"
-						isExternal
-					>
-						<Button className="block h-full bg-default-100 py-2" type="button">
+					<Link className="mx-auto" href={creditCardLink} isExternal>
+						<Button
+							className="block h-full bg-default-100 py-2"
+							type="button"
+							onPress={() => window.open(creditCardLink, "_blank")}
+						>
 							<span>
 								Em até 12x
 								<br />
@@ -75,8 +77,9 @@ export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 						</Button>
 					</Link>
 
-					<span>Pix copia e cola:</span>
-
+					<span>
+						<span className="inline lg:hidden">ou </span>Pix copia e cola:
+					</span>
 					<div className="relative flex items-start overflow-hidden rounded-lg bg-default-100 p-2">
 						<span className="whitespace-nowrap">{brCode}</span>
 
@@ -96,9 +99,8 @@ export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 						</div>
 					</div>
 
-					<span>ou QR code:</span>
-
-					{qrCode && <img className="aspect-square w-full" src={qrCode} alt="" />}
+					<span className="hidden lg:block">ou QR code:</span>
+					{qrCode && <img className="hidden aspect-square w-full lg:block" src={qrCode} alt="" />}
 				</ModalBody>
 
 				<ModalFooter className="w-full justify-center">
@@ -114,7 +116,7 @@ export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 						className="flex h-full flex-col border-highlight py-2 text-highlight leading-3"
 						type="submit"
 						variant="bordered"
-						onClick={() => fileInputRef.current?.click()}
+						onPress={() => fileInputRef.current?.click()}
 					>
 						<span>Enviar comprovante</span>
 						<span>(imagem, PDF ou print)</span>

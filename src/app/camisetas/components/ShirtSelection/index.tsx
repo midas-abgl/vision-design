@@ -41,9 +41,10 @@ export function ShirtSelection({ models }: ShirtSelectionProps) {
 		<div className="flex flex-col items-center gap-4">
 			<Select
 				classNames={{
-					base: "w-[20rem]",
+					base: "w-[20rem] h-full !mt-0",
 					innerWrapper: "justify-center",
-					label: "flex justify-center items-center gap-1 w-full h-6 pointer-events-auto",
+					label:
+						"flex justify-center relative items-center gap-1 w-full !translate-y-0 h-6 pointer-events-auto",
 					value: "w-auto",
 				}}
 				label={<span className="text-[1rem]">Modelo</span>}
@@ -64,7 +65,7 @@ export function ShirtSelection({ models }: ShirtSelectionProps) {
 			</Select>
 
 			<Card className="!overflow-visible relative rounded-[4rem] bg-[length:102%] bg-[url('/images/shirt_card_bg.png')] p-3 backdrop-blur-2xl">
-				<CardBody className="relative aspect-[1/1.05] w-[65vw] items-center gap-4 overflow-hidden rounded-[4rem] bg-[url('/images/shirt_card_fx.png')] bg-cover p-4 md:w-[30rem]">
+				<CardBody className="relative aspect-[1/1.05] w-full items-center gap-4 overflow-hidden rounded-[4rem] bg-[url('/images/shirt_card_fx.png')] bg-cover p-4 lg:w-[30rem]">
 					<EmblaCarousel>
 						<ShirtImage
 							model={model}
@@ -79,7 +80,7 @@ export function ShirtSelection({ models }: ShirtSelectionProps) {
 					</EmblaCarousel>
 				</CardBody>
 
-				<div className="absolute right-[-2rem] bottom-[-2rem] flex h-28 w-28 flex-col items-center justify-center rounded-full bg-[#575757] text-[0.625rem] uppercase">
+				<div className="lg:-right-8 lg:-bottom-8 -bottom-4 -right-4 absolute flex h-24 w-24 flex-col items-center justify-center rounded-full bg-[#575757] text-[0.625rem] uppercase lg:h-28 lg:w-28">
 					<span>Algodão</span>
 					<span>F3.1 - 100%</span>
 				</div>

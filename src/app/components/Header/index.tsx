@@ -2,7 +2,7 @@ import { Left, Pages, Right } from "./components";
 
 export function Header() {
 	return (
-		<header className="flex items-center justify-between">
+		<header className="flex w-full items-center justify-between">
 			<Left />
 
 			<Pages />

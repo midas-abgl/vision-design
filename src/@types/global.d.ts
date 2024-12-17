@@ -3,7 +3,7 @@ type ValuesOf<T extends any[]> = T[number];
 
 interface ModalProps {
 	isOpen: boolean;
-	onClose: () => void;
+	onClose?: () => void;
 	onOpenChange: () => void;
 }
 
@@ -23,4 +23,8 @@ interface PlausibleOpts {
 interface Window {
 	gtag: (...args: any) => void;
 	plausible: (eventName: string, opts?: PlausibleOpts) => void;
+}
+
+interface WithClassName<T = Record<string, unknown>> extends T {
+	className?: string;
 }

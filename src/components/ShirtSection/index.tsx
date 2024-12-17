@@ -52,9 +52,10 @@ export function ShirtSection({
 				</div>
 
 				<div
-					className="grid gap-4"
+					className="shirt-section grid gap-4"
 					style={{
-						gridTemplateColumns: `repeat(${columns || Math.ceil(data.length / 2)}, 1fr)`,
+						"--grid-cols": columns || Math.ceil(data.length / 2),
+						gridTemplateColumns: "repeat(var(--grid-cols), 1fr)",
 					}}
 				>
 					{data.map((each, i) => {

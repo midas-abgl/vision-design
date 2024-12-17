@@ -61,9 +61,9 @@ export function PurchaseSection({ models }: PurchaseSectionProps) {
 			<Button
 				className="relative rounded-full border-white px-16 py-4 uppercase transition-colors hover:border-highlight hover:bg-highlight hover:text-black [&>svg]:hover:text-black"
 				variant="bordered"
-				onClick={onOpen}
+				onPress={onOpen}
 			>
-				Comprar{" "}
+				Comprar
 				<Handbag className="absolute right-[calc(24px_/_3_*_2)] text-highlight transition-colors" size={24} />
 			</Button>
 

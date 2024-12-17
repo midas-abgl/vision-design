@@ -30,9 +30,6 @@ export default async function (phase: string, { defaultConfig }) {
 			},
 		},
 		skipTrailingSlashRedirect: true,
-		typescript: {
-			ignoreBuildErrors: true,
-		},
 		webpack: (config, options) => {
 			config.module.rules.push({
 				test: /\.svg$/i,

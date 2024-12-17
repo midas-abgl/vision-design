@@ -10,7 +10,7 @@ export interface ProvidersProps {
 
 export function Providers({ children }: ProvidersProps) {
 	return (
-		<NextUIProvider>
+		<NextUIProvider className="flex flex-col justify-between p-8 backdrop-blur-3xl lg:h-[100vh] lg:px-24 lg:py-20">
 			<NuqsAdapter>
 				<AppStoreProvider>{children}</AppStoreProvider>
 			</NuqsAdapter>

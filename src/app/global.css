@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.shirt-section {
+	@media (max-width: 768px) {
+		grid-template-columns: repeat(min(var(--grid-cols), 5), 1fr) !important;
+	}
+}
+
 * {
 	margin: 0;
 	padding: 0;

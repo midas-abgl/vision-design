@@ -12,10 +12,10 @@ export default async function Home() {
 	const models = await useApi<ShirtListing>("GET", "/shirts");
 
 	return (
-		<main className="my-24 flex flex-col gap-32">
-			<Banner />
+		<main className="flex flex-col">
+			<Banner className="my-16 lg:mt-24 lg:mb-32" />
 
-			<div className="flex justify-center gap-36">
+			<div className="flex flex-col justify-center gap-20 lg:flex-row lg:gap-36">
 				<ShirtSelection models={models} />
 
 				<section className="flex flex-col justify-center gap-8">
