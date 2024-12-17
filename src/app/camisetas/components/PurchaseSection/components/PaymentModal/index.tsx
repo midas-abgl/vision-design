@@ -61,12 +61,20 @@ export function PaymentModal({ isOpen, onClose, onOpenChange }: ModalProps) {
 				<ModalHeader>Forma de pagamento</ModalHeader>
 
 				<ModalBody className="w-full">
-					<span>
-						<Link href="https://pay.infinitepay.io/vision-design/VC1D-uex66ZqVz-51,99" isExternal>
-							Cartão
-						</Link>{" "}
-						em até 12x (com juros da plataforma)
-					</span>
+					<span>Cartão:</span>
+					<Link
+						className="mx-auto"
+						href="https://pay.infinitepay.io/vision-design/VC1D-uex66ZqVz-51,99"
+						isExternal
+					>
+						<Button className="block h-full bg-default-100 py-2" type="button">
+							<span>
+								Em até 12x
+								<br />
+								(com juros da plataforma)
+							</span>
+						</Button>
+					</Link>
 
 					<span>Pix copia e cola:</span>
 
