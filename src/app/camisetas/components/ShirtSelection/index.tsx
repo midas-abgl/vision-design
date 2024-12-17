@@ -44,7 +44,7 @@ export function ShirtSelection({ models }: ShirtSelectionProps) {
 					base: "w-[20rem] h-full !mt-0",
 					innerWrapper: "justify-center",
 					label:
-						"flex justify-center relative items-center gap-1 w-full !translate-y-0 h-6 pointer-events-auto",
+						"flex justify-center relative items-center gap-1 w-full max-md:!translate-y-0 mb-2 h-6 pointer-events-auto",
 					value: "w-auto",
 				}}
 				label={<span className="text-[1rem]">Modelo</span>}

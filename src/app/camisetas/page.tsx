@@ -13,7 +13,7 @@ export default async function Home() {
 
 	return (
 		<main className="flex flex-col">
-			<Banner className="my-16 lg:mt-24 lg:mb-32" />
+			<Banner className="my-12 lg:mt-24 lg:mb-32" />
 
 			<div className="flex flex-col justify-center gap-20 lg:flex-row lg:gap-36">
 				<ShirtSelection models={models} />
