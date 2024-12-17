@@ -33,6 +33,7 @@ export function ClientModal({ isOpen, onOpenChange }: ModalProps) {
 						e.preventDefault();
 
 						const client = Object.fromEntries(new FormData(e.currentTarget)) as Client;
+						client.email = client.email.toLowerCase();
 						setClient(client);
 
 						const pedido = await useApi<string>("POST", "/orders", {
