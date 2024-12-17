@@ -57,7 +57,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 				<meta name="theme-color" content={viewport.themeColor} />
 			</head>
 
-			<body className="relative flex [&>div:first-of-type]:flex [&>div:first-of-type]:flex-1 [&>div:first-of-type]:flex-col [&>div:first-of-type]:justify-between [&>div:first-of-type]:px-24 [&>div:first-of-type]:py-20 [&>div:first-of-type]:backdrop-blur-3xl">
+			<body className="relative flex [&>div:first-of-type]:flex [&>div:first-of-type]:h-[100vh] [&>div:first-of-type]:flex-col [&>div:first-of-type]:justify-between [&>div:first-of-type]:px-24 [&>div:first-of-type]:py-20 [&>div:first-of-type]:backdrop-blur-3xl">
 				<Providers>
 					<Header />
 
