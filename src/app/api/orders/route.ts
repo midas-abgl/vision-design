@@ -2,6 +2,29 @@ import { database } from "@database";
 import { StatusCodes } from "http-status-codes";
 import { type NextRequest, NextResponse } from "next/server";
 
+export async function GET() {
+	const orders = await database
+		.selectFrom("ShirtOrder")
+		.leftJoin("Client", "Client.id", "ShirtOrder.clientId")
+		.leftJoin("Shirt", "Shirt.id", "ShirtOrder.shirtId")
+		.select([
+			"Client.name as client",
+			"id",
+			"color",
+			"downPayment",
+			"finalPayment",
+			"quantity",
+			"Shirt.model as model",
+			"size",
+			"termAccepted",
+			"createdAt",
+			"payments",
+		])
+		.execute();
+
+	return NextResponse.json(orders);
+}
+
 export async function POST(req: NextRequest) {
 	const { client: clientData, color, modelId: shirtId, payment, size } = await req.json();
 
